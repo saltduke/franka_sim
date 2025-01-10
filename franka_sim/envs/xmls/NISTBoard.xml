@@ -1,0 +1,30 @@
+<mujoco model="NISTBoard">
+  <compiler angle="radian" autolimits="true"/>
+<asset>
+    <mesh name="plate" file="NIST_board/assets/GMC_Laser_Plate_Virtual.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="bnc_f" file="NIST_board/assets/BNC_Female.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="waterproof_f" file="NIST_board/assets/Waterproof_Female.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="waterproof_m" file="NIST_board/assets/Waterproof_Male.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="pin16mm" file="NIST_board/assets/RGOCG16-50_16mm.STL" scale="0.001 0.001 0.001"/>
+ </asset>
+
+ <worldbody>
+     <body name="board">
+         <freejoint name="board"/>
+      <geom mesh="plate" material="white" type="mesh" euler="0 3.1415 1.5707" pos="0.25 0 0.009" mass="0.5"/>
+      <geom mesh="waterproof_f" material="dark_grey" pos="0.383 0.164 0.009" euler="0 -1.5707 -1.5707" type="mesh" mass="0.05"/>
+      <geom mesh="bnc_f" material="metal" pos="0.370 0.141 0.085" euler="0 3.1415 0" type="mesh" mass="0.05"/>
+    </body>
+
+     <body name="pin1">
+       <freejoint name="pin1"/>
+      <geom mesh="pin16mm" material="black" type="mesh" pos="0.62 -0.2 0" mass="0.01"/>
+    </body>
+
+     <body name="waterproof_male">
+      <freejoint name="waterproof_male"/>
+      <geom mesh="waterproof_m" material="dark_grey" pos="0.24 -0.1 0" euler="0 0 0" type="mesh" mass="0.05"/>
+    </body>
+ </worldbody>
+
+</mujoco>

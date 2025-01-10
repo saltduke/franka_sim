@@ -72,6 +72,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
         )
         self._gripper_ctrl_id = self._model.actuator("fingers_actuator").id
         self._pinch_site_id = self._model.site("pinch").id
+        #self._block_z = self._model.geom("block").size[2]
 
         self.observation_space = gym.spaces.Dict(
             {
@@ -179,7 +180,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
         # Make sure place target is at least 5 cm away from block_xy
         while np.linalg.norm(place_xy - block_xy) < 0.05:
             place_xy = np.random.uniform(*_SAMPLING_BOUNDS)
-        self._model.site_pos[self.place_sid] = (*place_xy, self._block_z + 0.1)
+        self._model.site_pos[self.place_sid] = (*place_xy, self._default_block_z + 0.1)
 
         mujoco.mj_forward(self._model, self._data)
 
