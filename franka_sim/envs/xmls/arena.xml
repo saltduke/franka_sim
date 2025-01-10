@@ -14,28 +14,28 @@
   <asset>
     <texture type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="32" height="512"/>
     <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4"/>
-    <!-- <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1="0 0 0" rgb2="0 0 0"/> -->
+    <!--<texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1="0 0 0" rgb2="0 0 0"/> -->
     <material name="grid" texture="grid" texrepeat="2 2" texuniform="true" reflectance="0"/>
   </asset>
 
   <worldbody>
     <camera name="front" pos="1.3 0.0 0.7" quat="0.5963678 0.3799282 0.3799282 0.5963678" fovy="45"/>
     <light pos="0 0 3" dir="0 0 -1" diffuse="1 1 1" specular=".3 .3 .3"/>
-    <light pos="0 -.5 .4" mode="targetbodycom" target="block" diffuse=".8 .8 .8" specular=".3 .3 .3"/>
+    <light pos="0 -.5 .4" mode="targetbodycom" target="waterproof_male" diffuse=".8 .8 .8" specular=".3 .3 .3"/>
     <geom name="floor" size="3 3 0.01" type="plane" material="grid"/>
-    <body name="block" pos="0.5 0 .02">
+    <!--<body name="block" pos="0.5 0 .02">
       <freejoint name="block"/>
       <geom name="block" type="box" size=".02 .02 .02" mass="0.1" rgba=".6 .3 .6 1"/>
-    </body>
+    </body>-->
     <body name="target" pos=".15 0 .5" quat="0 1 0 0" mocap="true">
       <geom name="target" type="box" size=".03 .03 .03" contype="0" conaffinity="0" rgba=".6 .3 .3 0"/>
     </body>
-    <site name="place" pos=".15 0 .5" size=".03" rgba="1 1 0 1"/>
+    <site name="place" pos="0.383 0.164 0.179" size=".03" rgba="1 1 0 1"/>
   </worldbody>
 
   <sensor>
-    <framepos name="block_pos" objtype="geom" objname="block"/>
-    <framequat name="block_quat" objtype="geom" objname="block"/>
+    <framepos name="waterproof_pos" objtype="geom" objname="waterproof_m"/>
+    <framequat name="waterproof_quat" objtype="geom" objname="waterproof_m"/>
     <framepos name="place_pos" objtype="site" objname="place"/>
   </sensor>
 </mujoco>
