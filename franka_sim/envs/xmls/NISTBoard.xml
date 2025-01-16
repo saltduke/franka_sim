@@ -16,24 +16,55 @@
     <mesh name="waterproof_f" file="NIST_board/assets/Waterproof_Female.STL" scale="0.001 0.001 0.001"/>
     <mesh name="waterproof_m" file="NIST_board/assets/Waterproof_Male.STL" scale="0.001 0.001 0.001"/>
     <mesh name="pin16mm" file="NIST_board/assets/RGOCG16-50_16mm.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="gearplate" file="NIST_board/assets/Gear_Plate.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="gearshaft" file="NIST_board/assets/Gear_Shaft.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="largegear" file="NIST_board/assets/Gear_Large.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="ethnernet_f" file="NIST_board/assets/RJ45_Female.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="ethnernet_h" file="NIST_board/assets/RJ45_Housing.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="ethnernet_m" file="NIST_board/assets/RJ45_Male.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="dsub_h" file="NIST_board/assets/DB_Housing.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="dsub_f" file="NIST_board/assets/DSUB_Female.STL" scale="0.001 0.001 0.001"/>
+    <!--<mesh name="dsub_m" file="NIST_board/assets/DSUB_Male.STL" scale="0.001 0.001 0.001"/>-->
  </asset>
 
  <worldbody>
      <body name="board">
          <freejoint name="board"/>
       <geom mesh="plate" material="white" type="mesh" euler="0 3.1415 1.5707" pos="0.25 0 0.009" mass="1.35"/>
-      <geom mesh="waterproof_f" material="dark_grey" pos="0.383 0.164 0.009" euler="0 -1.5707 -1.5707" type="mesh" mass="0.00001"/>
-      <!--<geom mesh="bnc_f" material="metal" pos="0.370 0.141 0.085" euler="0 3.1415 0" type="mesh" mass="0.05"/>-->
+      <geom mesh="waterproof_f" material="dark_grey" pos="0.415 0.134 0.009" euler="1.5707 0 0" type="mesh" mass="0.00001"/>
+      <geom mesh="gearplate" material="dark_grey" pos="0.51 0.37 -0.072" euler="0 0 3.1415" type="mesh" mass="0.00001"/>
+      <geom mesh="gearshaft" material="dark_grey" pos="0.084 0.454 0.086" euler="3.1415 0 0" type="mesh" mass="0.00001"/>
+      <geom mesh="gearshaft" material="dark_grey" pos="0.084 0.424 0.086" euler="3.1415 0 0" type="mesh" mass="0.00001"/>
+      <geom mesh="gearshaft" material="dark_grey" pos="0.084 0.374 0.086" euler="3.1415 0 0" type="mesh" mass="0.00001"/>
+      <geom mesh="ethnernet_h" material="black" pos="0.32 -0.04 0.094" euler="0 3.1415 1.5707" type="mesh" mass="0.00001"/>
+      <geom mesh="ethnernet_f" material="metal" pos="0.22 0.615 0.094" euler="0 3.1415 3.1415" type="mesh" mass="0.00001"/>
+      <geom mesh="dsub_h" material="black" pos="0.79 0.45 0.09" euler="3.1415 0 1.5707" type="mesh" mass="0.00001"/>
+      <geom mesh="dsub_f" material="black" pos="0.48 0.242 -0.01" euler="0 0 1.5707" type="mesh" mass="0.00001"/>
+      <geom mesh="bnc_f" material="silicone" pos="0.842 0.053 0.093" euler="0 3.1415 0" type="mesh" mass="0.05"/>
     </body>
 
-     <!--<body name="pin1">
+     <body name="pin1">
        <freejoint name="pin1"/>
       <geom mesh="pin16mm" material="black" type="mesh" pos="0.62 -0.2 0" mass="0.01"/>
-    </body>-->
+    </body>
+     <body name="large_gear">
+       <freejoint name="large_gear"/>
+      <geom mesh="largegear" material="white" type="mesh" pos="0.4 -0.3 0.089" euler="0 3.1415 0" mass="0.052"/>
+    </body>
 
      <body name="waterproof_male">
       <freejoint name="waterproof_male"/>
-      <geom mesh="waterproof_m" material="dark_grey" pos="0.383 0.164 0.039" euler="0 3.1415 0" type="mesh" mass="0.045"/>
+      <geom mesh="waterproof_m" material="dark_grey" pos="0.4 -0.2 0.039" euler="0 3.1415 0" type="mesh" mass="0.045"/>
+    </body>
+
+     <!--<body name="dsub_male">
+      <freejoint name="dsub_male"/>
+      <geom mesh="dsub_m" material="dark_grey" pos="0.5 -0.2 0.039" euler="0 0 0" type="mesh" mass="0.029"/>
+    </body>-->
+
+     <body name="ethnernet_male">
+      <freejoint name="ethnernet_male"/>
+      <geom mesh="ethnernet_m" material="dark_grey" pos="0.4 -0.2 0.289" euler="-1.5707 0 0" type="mesh" mass="0.005"/>
     </body>
  </worldbody>
 
