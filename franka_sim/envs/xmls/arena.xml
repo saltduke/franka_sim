@@ -29,12 +29,14 @@
       <geom name="block" type="box" size=".02 .02 .02" mass="0.1" rgba=".6 .3 .6 1"/>
     </body>-->
     <body name="pin1">
+      <inertial mass="0.078" pos="0 0 0" quat="1 0 0 0"
+                diaginertia="1.7e-05 2e-06 1.7e-05"/>
        <freejoint name="pin1"/>
-      <geom name="pin1" mesh="pin16mm" material="black" type="mesh" pos="0.62 -0.2 0" mass="0.01"/>
+      <geom name="pin1" mesh="pin16mm" material="black" type="mesh" pos="0.07 -0.15 0" />
     </body>
-    <!--<body name="target" pos=".15 0 .5" quat="0 1 0 0" mocap="true">
-      <geom name="target" type="box" size=".03 .03 .03" contype="0" conaffinity="0" rgba=".6 .3 .3 0"/>
-    </body>-->
+    <body name="target" pos="0.203 0.164 -0.05" quat="0 1 0 0" mocap="true">
+      <geom name="target" type="box" size=".009 .009 .02" contype="0" conaffinity="0" rgba=".6 .3 .3 0"/>
+    </body>
     <!--<site name="place" pos="0.383 0.164 0.179" size=".03" rgba="1 1 1 1"/>-->
   </worldbody>
 

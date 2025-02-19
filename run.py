@@ -95,7 +95,7 @@ class MyFrankaEnv(PandaPickCubeGymEnv):
         # TODO: provide reward
         # An example how to get the positions of the block, TCP (end-effector tip)
         # and target placing position
-        block_pos = self._data.sensor("block_pos").data  # noqa: F841
+        pin1_pos = self._data.sensor("pin1_pos").data  # noqa: F841
         tcp_pos = self._data.sensor("2f85/pinch_pos").data  # noqa: F841
         place_pos = self._data.sensor("place_pos").data  # noqa: F841
 

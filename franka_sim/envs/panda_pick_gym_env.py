@@ -91,7 +91,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
                         # "panda/joint_vel": spaces.Box(-np.inf, np.inf, shape=(7,), dtype=np.float32),
                         # "panda/joint_torque": specs.Array(shape=(21,), dtype=np.float32),
                         # "panda/wrist_force": specs.Array(shape=(3,), dtype=np.float32),
-                        "block_pos": spaces.Box(
+                        "pin1_pos": spaces.Box(
                             -np.inf, np.inf, shape=(3,), dtype=np.float32
                         ),
                         "place_pos": spaces.Box(
@@ -155,7 +155,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
 
     @cached_property
     def _default_block_z(self):
-        return self._model.geom("block").size[2]
+        return self._model.geom("pin1").size[2]
 
     def reset(
         self, seed=None, **kwargs
@@ -173,7 +173,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
 
         # Sample a new block position.
         block_xy = np.random.uniform(*_SAMPLING_BOUNDS)
-        self._data.jnt("block").qpos[:3] = (*block_xy, self._default_block_z)
+        self._data.jnt("pin1").qpos[:3] = (*block_xy, self._default_block_z)
 
         # Sample new place target position 10 cm above ground
         place_xy = block_xy
@@ -185,7 +185,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
         mujoco.mj_forward(self._model, self._data)
 
         # Cache the initial block height.
-        self._z_init = self._data.sensor("block_pos").data[2]
+        self._z_init = self._data.sensor("pin1_pos").data[2]
         self._z_success = self._z_init + 0.2
 
         obs = self._compute_observation()
@@ -286,8 +286,8 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
         if self.image_obs:
             obs["images"] = {}
             obs["images"]["front"], obs["images"]["wrist"] = self.render(cameras=2)
-        block_pos = self._data.sensor("block_pos").data.astype(np.float32)
-        obs["state"]["block_pos"] = block_pos
+        pin1_pos = self._data.sensor("pin1_pos").data.astype(np.float32)
+        obs["state"]["pin1_pos"] = pin1_pos
         place_pos = self._data.sensor("place_pos").data.astype(np.float32)
         obs["state"]["place_pos"] = place_pos
 
@@ -297,11 +297,11 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
         return obs
 
     def _compute_reward(self) -> float:
-        block_pos = self._data.sensor("block_pos").data
+        pin1_pos = self._data.sensor("pin1_pos").data
         tcp_pos = self._data.sensor("2f85/pinch_pos").data
-        dist = np.linalg.norm(block_pos - tcp_pos)
+        dist = np.linalg.norm(pin1_pos - tcp_pos)
         r_close = np.exp(-20 * dist)
-        r_lift = (block_pos[2] - self._z_init) / (self._z_success - self._z_init)
+        r_lift = (pin1_pos[2] - self._z_init) / (self._z_success - self._z_init)
         r_lift = np.clip(r_lift, 0.0, 1.0)
         rew = 0.3 * r_close + 0.7 * r_lift
         return rew
