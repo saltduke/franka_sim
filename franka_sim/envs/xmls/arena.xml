@@ -16,9 +16,8 @@
     <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4"/>
     <!--<texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1="0 0 0" rgb2="0 0 0"/> -->
     <material name="grid" texture="grid" texrepeat="2 2" texuniform="true" reflectance="0"/>
-    <mesh name="pin16mm" file="NIST_board/assets/RGOCG16-50_16mm.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="pin16mm" file="NIST_board/assets/pin16mm.stl" scale="0.001 0.001 0.001"/>
     <mesh name="gearlarge" file="NIST_board/assets/Gear_Large.STL" scale="0.001 0.001 0.001"/>
-    <mesh name="pinholder" file="NIST_board/assets/cig3.stl" scale="0.001 0.001 0.001"/>
     <mesh name="holder1" file="NIST_board/assets/Holder_split/holder1.stl" scale="0.001 0.001 0.001"/>
     <mesh name="holder2" file="NIST_board/assets/Holder_split/holder2.stl" scale="0.001 0.001 0.001"/>
     <mesh name="holder3" file="NIST_board/assets/Holder_split/holder3.stl" scale="0.001 0.001 0.001"/>
