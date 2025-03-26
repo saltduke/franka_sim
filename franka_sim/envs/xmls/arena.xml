@@ -43,7 +43,7 @@
       <freejoint name="block"/>
       <geom name="block" type="box" size=".02 .02 .02" mass="0.1" rgba=".6 .3 .6 1"/>
     </body>-->
-    <body name="pin1" pos="0.5 0 0">
+    <body name="pin1" pos="0 0 0">
       <!--<inertial mass="0.078" pos="0 0 0"
                 fullinertia="0.170622301075714 0.170664016429839 0.0242170292193114 -5.35059905166272e-07 -2.14785983010242e-06 -7.96049645670690e-07"/>-->
        <freejoint name="pin1"/>
@@ -51,7 +51,7 @@
       <geom name="pin1/col" mesh="pin16mm" material="black" type="mesh"  euler="0 0 0" group="3"/>
     </body>
 
-    <body name="pinholder" pos="0.5 0 0">
+    <body name="pinholder" pos="0 0 0">
       <!--<inertial mass="0.031" pos="0 0 0"
                 fullinertia="1.79409597672703 1.99404039002340 0.448296442973063 -2.89946239627898e-06 1.26890206642449e-05 -2.59472397565842e-06"/>-->
        <freejoint name="pinholder"/>
@@ -76,10 +76,10 @@
       <geom name="gear1" mesh="gearlarge" material="black" type="mesh" pos="0.07 -0.15 0" group="2"/>
       <geom name="gear1/col" mesh="gearlarge" material="black" type="mesh" pos="0.07 -0.15 0" group="3"/>
     </body>-->
-    <body name="target" pos="0.203 0.164 -0.05" quat="0 1 0 0" mocap="true">
+   <body name="target" pos="0.203 0.164 -0.05" quat="0 1 0 0" mocap="true">
       <geom name="target" type="box" size=".009 .009 .02" contype="0" conaffinity="0" rgba=".6 .3 .3 0"/>
     </body>
- <site name="place" pos="0.383 0.164 0.179" size=".03" rgba="1 1 1 1"/>
+ <!--<site name="place" pos="0.383 0.164 0.179" size=".03" rgba="1 1 1 1"/>-->
   </worldbody>
 
   <sensor>
