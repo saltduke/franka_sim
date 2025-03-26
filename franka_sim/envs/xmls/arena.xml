@@ -17,6 +17,21 @@
     <!--<texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1="0 0 0" rgb2="0 0 0"/> -->
     <material name="grid" texture="grid" texrepeat="2 2" texuniform="true" reflectance="0"/>
     <mesh name="pin16mm" file="NIST_board/assets/RGOCG16-50_16mm.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="gearlarge" file="NIST_board/assets/Gear_Large.STL" scale="0.001 0.001 0.001"/>
+    <mesh name="pinholder" file="NIST_board/assets/cig3.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder1" file="NIST_board/assets/Holder_split/holder1.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder2" file="NIST_board/assets/Holder_split/holder2.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder3" file="NIST_board/assets/Holder_split/holder3.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder4" file="NIST_board/assets/Holder_split/holder4.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder5" file="NIST_board/assets/Holder_split/holder5.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder6" file="NIST_board/assets/Holder_split/holder6.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder7" file="NIST_board/assets/Holder_split/holder7.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder8" file="NIST_board/assets/Holder_split/holder8.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder9" file="NIST_board/assets/Holder_split/holder9.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder10" file="NIST_board/assets/Holder_split/holder10.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder11" file="NIST_board/assets/Holder_split/holder11.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="holder12" file="NIST_board/assets/Holder_split/holder12.stl" scale="0.001 0.001 0.001"/>
+
   </asset>
 
   <worldbody>
@@ -28,21 +43,48 @@
       <freejoint name="block"/>
       <geom name="block" type="box" size=".02 .02 .02" mass="0.1" rgba=".6 .3 .6 1"/>
     </body>-->
-    <body name="pin1">
-      <inertial mass="0.078" pos="0 0 0" quat="1 0 0 0"
-                diaginertia="1.7e-05 2e-06 1.7e-05"/>
+    <body name="pin1" pos="0.5 0 0">
+      <!--<inertial mass="0.078" pos="0 0 0"
+                fullinertia="0.170622301075714 0.170664016429839 0.0242170292193114 -5.35059905166272e-07 -2.14785983010242e-06 -7.96049645670690e-07"/>-->
        <freejoint name="pin1"/>
-      <geom name="pin1" mesh="pin16mm" material="black" type="mesh" pos="0.07 -0.15 0" />
+      <geom name="pin1" mesh="pin16mm" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="pin1/col" mesh="pin16mm" material="black" type="mesh"  euler="0 0 0" group="3"/>
     </body>
+
+    <body name="pinholder" pos="0.5 0 0">
+      <!--<inertial mass="0.031" pos="0 0 0"
+                fullinertia="1.79409597672703 1.99404039002340 0.448296442973063 -2.89946239627898e-06 1.26890206642449e-05 -2.59472397565842e-06"/>-->
+       <freejoint name="pinholder"/>
+      <geom name="holder1" mesh="holder1" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="holder2" mesh="holder2" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="holder3" mesh="holder3" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="holder4" mesh="holder4" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="holder5" mesh="holder5" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="holder6" mesh="holder6" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="holder7" mesh="holder7" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="holder8" mesh="holder8" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="holder9" mesh="holder9" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="holder10" mesh="holder10" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="holder11" mesh="holder11" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <geom name="holder12" mesh="holder12" material="black" type="mesh" euler="0 0 0" group="2"/>
+      <!--<geom name="pinholder/col" mesh="pinholder" material="black" type="mesh" euler="1.5707 0 0" group="3"/>-->
+    </body>
+    <!--<body name="gear1">
+      <!--<inertial mass="0.052" pos="0 0 0" euler="0 3.1415 0.189"
+                diaginertia="4.9E-11 4.9E-11 9.4E-11"/>
+       <freejoint name="gear1"/>
+      <geom name="gear1" mesh="gearlarge" material="black" type="mesh" pos="0.07 -0.15 0" group="2"/>
+      <geom name="gear1/col" mesh="gearlarge" material="black" type="mesh" pos="0.07 -0.15 0" group="3"/>
+    </body>-->
     <body name="target" pos="0.203 0.164 -0.05" quat="0 1 0 0" mocap="true">
       <geom name="target" type="box" size=".009 .009 .02" contype="0" conaffinity="0" rgba=".6 .3 .3 0"/>
     </body>
-    <!--<site name="place" pos="0.383 0.164 0.179" size=".03" rgba="1 1 1 1"/>-->
+ <site name="place" pos="0.383 0.164 0.179" size=".03" rgba="1 1 1 1"/>
   </worldbody>
 
   <sensor>
     <framepos name="pin1_pos" objtype="geom" objname="pin1"/>
     <framequat name="pin1_quat" objtype="geom" objname="pin1"/>
-    <framepos name="place_pos" objtype="site" objname="place"/>
+   <framepos name="place_pos" objtype="site" objname="place"/>
   </sensor>
 </mujoco>

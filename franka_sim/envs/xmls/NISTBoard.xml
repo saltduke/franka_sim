@@ -28,21 +28,23 @@
  </asset>
 
  <worldbody>
-     <body name="board">
+     <!--<body name="board">
+         <!--<inertial mass="1.35" pos="0 0 0"
+                fullinertia="21644.5657774305 19424.6461735205 41047.0427905196 24.6749681511372 34.3249378241447 0.515442590658724"/>
          <freejoint name="board"/>
-      <geom mesh="plate" material="white" type="mesh" euler="0 3.1415 1.5707" pos="0.25 0 0.009" mass="1.35"/>
+      <geom mesh="plate" material="white" type="mesh" euler="0 3.1415 1.5707" pos="0.25 0 0.009"/>
       <!--<geom mesh="waterproof_f" material="dark_grey" pos="0.415 0.134 0.009" euler="1.5707 0 0" type="mesh" mass="0.00001"/>-->
-      <geom mesh="gearplate" material="dark_grey" pos="0.51 0.37 -0.072" euler="0 0 3.1415" type="mesh" mass="0.00001"/>
-      <geom mesh="gearshaft" material="dark_grey" pos="0.084 0.454 0.086" euler="3.1415 0 0" type="mesh" mass="0.00001"/>
-      <geom mesh="gearshaft" material="dark_grey" pos="0.084 0.424 0.086" euler="3.1415 0 0" type="mesh" mass="0.00001"/>
-      <geom mesh="gearshaft" material="dark_grey" pos="0.084 0.374 0.086" euler="3.1415 0 0" type="mesh" mass="0.00001"/>
+      <!--<geom mesh="gearplate" material="dark_grey" pos="0.51 0.37 -0.072" euler="0 0 3.1415" type="mesh"/>
+      <geom mesh="gearshaft" material="dark_grey" pos="0.084 0.454 0.086" euler="3.1415 0 0" type="mesh"/>
+      <geom mesh="gearshaft" material="dark_grey" pos="0.084 0.424 0.086" euler="3.1415 0 0" type="mesh"/>
+      <geom mesh="gearshaft" material="dark_grey" pos="0.084 0.374 0.086" euler="3.1415 0 0" type="mesh"/>
       <site name="place" pos="0.373 0.264 0.01" size=".009 .009 .02" rgba="1 0 0 1" type="cylinder"/>
       <!--<geom mesh="ethnernet_h" material="black" pos="0.32 -0.04 0.094" euler="0 3.1415 1.5707" type="mesh" mass="0.00001"/>
       <geom mesh="ethnernet_f" material="metal" pos="0.22 0.615 0.094" euler="0 3.1415 3.1415" type="mesh" mass="0.00001"/>
       <geom mesh="dsub_h" material="black" pos="0.79 0.45 0.09" euler="3.1415 0 1.5707" type="mesh" mass="0.00001"/>
       <geom mesh="dsub_f" material="black" pos="0.48 0.242 -0.01" euler="0 0 1.5707" type="mesh" mass="0.00001"/>
-      <geom mesh="bnc_f" material="silicone" pos="0.842 0.053 0.093" euler="0 3.1415 0" type="mesh" mass="0.05"/>-->
-    </body>
+      <geom mesh="bnc_f" material="silicone" pos="0.842 0.053 0.093" euler="0 3.1415 0" type="mesh" mass="0.05"/>
+    </body>-->
 
 
      <!--<body name="large_gear">

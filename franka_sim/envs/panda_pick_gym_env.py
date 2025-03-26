@@ -173,7 +173,8 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
 
         # Sample a new block position.
         block_xy = np.random.uniform(*_SAMPLING_BOUNDS)
-        self._data.jnt("pin1").qpos[:3] = (*block_xy, self._default_block_z)
+        self._data.jnt("pin1").qpos[:3] = (*block_xy+(0.017, -0.075), self._default_block_z+0.026) #add offset to fit holder
+        self._data.jnt("pinholder").qpos[:3] = (*block_xy, self._default_block_z)
 
         # Sample new place target position 10 cm above ground
         place_xy = block_xy
