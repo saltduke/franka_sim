@@ -50,9 +50,9 @@
       <geom name="pin1/col" mesh="pin16mm" material="black" type="mesh"  euler="0 0 0" group="3"/>
     </body>
 
-    <body name="pinholder" pos="0 0 0">
-      <!--<inertial mass="0.031" pos="0 0 0"
-                fullinertia="1.79409597672703 1.99404039002340 0.448296442973063 -2.89946239627898e-06 1.26890206642449e-05 -2.59472397565842e-06"/>-->
+    <!--<body name="pinholder" pos="0 0 0">
+      <inertial mass="0.031" pos="0 0 0"
+                fullinertia="1.79409597672703 1.99404039002340 0.448296442973063 -2.89946239627898e-06 1.26890206642449e-05 -2.59472397565842e-06"/>
        <freejoint name="pinholder"/>
       <geom name="holder1" mesh="holder1" material="black" type="mesh" euler="0 0 0" group="2"/>
       <geom name="holder2" mesh="holder2" material="black" type="mesh" euler="0 0 0" group="2"/>
@@ -66,8 +66,8 @@
       <geom name="holder10" mesh="holder10" material="black" type="mesh" euler="0 0 0" group="2"/>
       <geom name="holder11" mesh="holder11" material="black" type="mesh" euler="0 0 0" group="2"/>
       <geom name="holder12" mesh="holder12" material="black" type="mesh" euler="0 0 0" group="2"/>
-      <!--<geom name="pinholder/col" mesh="pinholder" material="black" type="mesh" euler="1.5707 0 0" group="3"/>-->
-    </body>
+      <geom name="pinholder/col" mesh="pinholder" material="black" type="mesh" euler="1.5707 0 0" group="3"/>
+    </body>-->
     <!--<body name="gear1">
       <!--<inertial mass="0.052" pos="0 0 0" euler="0 3.1415 0.189"
                 diaginertia="4.9E-11 4.9E-11 9.4E-11"/>

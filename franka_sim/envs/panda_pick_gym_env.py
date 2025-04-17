@@ -165,17 +165,17 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
 
         # Reset arm to home position.
         self._data.qpos[self._panda_dof_ids] = _PANDA_HOME
+        self._data.qpos[[7, 8, 9, 10, 11, 12, 13, 14]] = [ 0.65519683,  0.00120897,  0.65687683, -0.63142954,  0.65519683,  0.00120859,  0.65687213, -0.63142825]
         mujoco.mj_forward(self._model, self._data)
 
         # Reset mocap body to home position.
         tcp_pos = self._data.sensor("2f85/pinch_pos").data
         self._data.mocap_pos[0] = tcp_pos
-
         # Sample a new block position.
         block_xy = np.random.uniform(*_SAMPLING_BOUNDS)
-        self._data.jnt("pin1").qpos[:3] = (*block_xy+(0.017, -0.075), self._default_block_z+0.026) #add offset to fit holder
+        self._data.jnt("pin1").qpos[:3] = tcp_pos #add offset to fit holder
         self._data.jnt("pinholder").qpos[:3] = (*block_xy, self._default_block_z)
-
+        self._data.ctrl[self._gripper_ctrl_id] = 255
         # Sample new place target position 10 cm above ground
         place_xy = block_xy
         # Make sure place target is at least 5 cm away from block_xy
@@ -219,7 +219,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
         g = self._data.ctrl[self._gripper_ctrl_id] / 255
         dg = grasp * self._action_scale[1]
         ng = np.clip(g + dg, 0.0, 1.0)
-        self._data.ctrl[self._gripper_ctrl_id] = ng * 255
+        #self._data.ctrl[self._gripper_ctrl_id] = ng * 255
 
         for _ in range(self._n_substeps):
             tau = opspace(
