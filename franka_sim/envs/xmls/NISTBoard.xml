@@ -25,7 +25,6 @@
     <mesh name="board11" file="NIST_board/assets/Board_split/board11.stl" scale="0.001 0.001 0.001"/>
     <mesh name="board12" file="NIST_board/assets/Board_split/board12.stl" scale="0.001 0.001 0.001"/>
     <mesh name="board13" file="NIST_board/assets/Board_split/board13.stl" scale="0.001 0.001 0.001"/>
-    <mesh name="board14" file="NIST_board/assets/Board_split/board14.stl" scale="0.001 0.001 0.001"/>
     <!--<mesh name="bnc_f" file="NIST_board/assets/BNC_Female.STL" scale="0.001 0.001 0.001"/>
     <mesh name="waterproof_f" file="NIST_board/assets/Waterproof_Female.STL" scale="0.001 0.001 0.001"/>
     <mesh name="waterproof_m" file="NIST_board/assets/Waterproof_Male.STL" scale="0.001 0.001 0.001"/>-->
@@ -59,7 +58,6 @@
       <geom mesh="board11" material="white" type="mesh" euler="0 3.1415 1.5707" pos="0.25 0 0.009"/>
       <geom mesh="board12" material="white" type="mesh" euler="0 3.1415 1.5707" pos="0.25 0 0.009"/>
       <geom mesh="board13" material="white" type="mesh" euler="0 3.1415 1.5707" pos="0.25 0 0.009"/>
-      <geom mesh="board14" material="white" type="mesh" euler="0 3.1415 1.5707" pos="0.25 0 0.009"/>
       <!--<geom mesh="waterproof_f" material="dark_grey" pos="0.415 0.134 0.009" euler="1.5707 0 0" type="mesh" mass="0.00001"/>-->
       <!--<geom mesh="gearplate" material="dark_grey" pos="0.51 0.37 -0.072" euler="0 0 3.1415" type="mesh"/>
       <geom mesh="gearshaft" material="dark_grey" pos="0.084 0.454 0.086" euler="3.1415 0 0" type="mesh"/>
