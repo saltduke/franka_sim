@@ -81,6 +81,9 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
                         "panda/tcp_pos": spaces.Box(
                             -np.inf, np.inf, shape=(3,), dtype=np.float32
                         ),
+                        "panda/tcp_quat": spaces.Box(
+                            -np.inf, np.inf, shape=(3,), dtype=np.float32
+                        ),
                         "panda/tcp_vel": spaces.Box(
                             -np.inf, np.inf, shape=(3,), dtype=np.float32
                         ),
@@ -90,8 +93,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
                         # "panda/joint_pos": spaces.Box(-np.inf, np.inf, shape=(7,), dtype=np.float32),
                         # "panda/joint_vel": spaces.Box(-np.inf, np.inf, shape=(7,), dtype=np.float32),
                         # "panda/joint_torque": specs.Array(shape=(21,), dtype=np.float32),
-                        # "panda/wrist_force": specs.Array(shape=(3,), dtype=np.float32),
-                        "pin1_pos": spaces.Box(
+                         "panda/wrist_force": spaces.Box(
                             -np.inf, np.inf, shape=(3,), dtype=np.float32
                         ),
                         "place_pos": spaces.Box(
@@ -174,7 +176,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
         # Sample a new block position.
         block_xy = np.random.uniform(*_SAMPLING_BOUNDS)
         self._data.jnt("pin1").qpos[:3] = tcp_pos #add offset to fit holder
-        self._data.jnt("pinholder").qpos[:3] = (*block_xy, self._default_block_z)
+        #self._data.jnt("pinholder").qpos[:3] = (*block_xy, self._default_block_z)
         self._data.ctrl[self._gripper_ctrl_id] = 255
         # Sample new place target position 10 cm above ground
         place_xy = block_xy
@@ -245,7 +247,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
         rendered_frames = []
         for cam_id in self.camera_id[:cameras]:
             rendered_frames.append(
-                self._viewer.render(render_mode="rgb_array", camera_id=cam_id)
+                self._viewer.render(render_mode="rgb_array")
             )
         return rendered_frames
 
@@ -257,6 +259,9 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
 
         tcp_pos = self._data.sensor("2f85/pinch_pos").data
         obs["state"]["panda/tcp_pos"] = tcp_pos.astype(np.float32)
+
+        tcp_quat = self._data.sensor("2f85/pinch_quat").data
+        obs["state"]["panda/tcp_quat"] = tcp_quat.astype(np.float32)
 
         tcp_vel = self._data.sensor("2f85/pinch_vel").data
         obs["state"]["panda/tcp_vel"] = tcp_vel.astype(np.float32)
@@ -281,8 +286,8 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
         # ).ravel()
         # obs["panda/joint_torque"] = symlog(joint_torque.astype(np.float32))
 
-        # wrist_force = self._data.sensor("panda/wrist_force").data.astype(np.float32)
-        # obs["panda/wrist_force"] = symlog(wrist_force.astype(np.float32))
+        wrist_force = self._data.sensor("panda/wrist_force").data.astype(np.float32)
+        obs["panda/wrist_force"] = wrist_force
 
         if self.image_obs:
             obs["images"] = {}
@@ -313,5 +318,5 @@ if __name__ == "__main__":
     env.reset()
     for i in range(100):
         env.step(np.random.uniform(-1, 1, 4))
-        env.render(cameras=2)
+        env.render()
     env.close()

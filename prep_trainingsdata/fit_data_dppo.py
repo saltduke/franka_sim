@@ -1,10 +1,11 @@
 import read_data
 import numpy as np
 import json
+import rerun as rr
 import os
 import io
 import shutil
-import vizualize_data
+#import vizualize_data
 import matplotlib.pyplot as plt
 def display_trajectory(xyz_data, title):
     """
@@ -28,17 +29,15 @@ def display_trajectory(xyz_data, title):
 if __name__ == "__main__":
     # Specify the path to your HDF5 file
     img = False
-    f =open('traj.json')
+    f =open('traj_aut.json')
     files = json.load(f)
 
-    obs_keys = {'pose':[0,1,2], 'velocity':[0,1,2], 'gripper_positions':0, 'compensated_base_force':[0,1,2]}
+    obs_keys = {'pose':[0,1,2,3,4,5], 'velocity':[0,1,2], 'gripper_positions':0, 'compensated_base_force':[0,1,2]}
     actions = np.zeros([100,4])
     states = np.zeros([100,23])
     traj_lengths = np.zeros(100)
-
-    i = 0
-    ts_min = np.inf
-    diff_old = np.inf
+    rr.init("3D Pose Visualization", spawn=True)
+    file_idx = 0
     newdata = {}
     newdata_num = []
     time = {}
@@ -48,14 +47,12 @@ if __name__ == "__main__":
     idxEnd = 0
     for file in files:
         try:
-            data = read_data.load_h5_file("/home/cgreiml/Documents/extract_data_for_training/vis_lib/data/" + file['file'])
+            data = read_data.load_h5_file("/home/uhhnie/robotics_project/data_prep/data/" + file['file'])
             ts_min = np.inf
+            diff_old = np.inf
             for k, v in data["timestamps"].items():
                 if v[0] < ts_min:
                     ts_min = v[0]
-
-            for k, v in data["timestamps"].items():
-                data["timestamps"][k] = data["timestamps"][k] - ts_min
             for k in obs_keys.keys():
                 data["timestamps"][k] = data["timestamps"][k] #- ts_min
                 diff_new = np.searchsorted(data["timestamps"][k], file['end'], side="left") - np.searchsorted(data["timestamps"][k], file['start'], side="left")
@@ -64,16 +61,36 @@ if __name__ == "__main__":
                     idxEnd = np.searchsorted(data["timestamps"][k], file['end'], side="left")
                     interval_k = k
                     diff_old = diff_new
-            traj_lengths[i]= diff_old
+            for k, v in data["timestamps"].items():
+                data["timestamps"][k] = data["timestamps"][k] - ts_min
+            traj_lengths[file_idx]= diff_old
             interval = data["timestamps"][interval_k][idxStart:idxEnd]
             for k,v in obs_keys.items():
                 idxes = np.searchsorted(data["timestamps"][k],interval,side="left")
                 newdata[k] = data['robot_state'][k][idxes][:,v]
                 time[k] = data["timestamps"][k][idxes]
-            display_trajectory(newdata["pose"],"Trajectory" + str(i))
+            for data_key in obs_keys.keys():
+                for i in range(0, len(time[data_key]), 10):
+                    rr.set_time_seconds("timestamp", time[data_key][i])
+                    if type(newdata[data_key][i]) == np.float64:
+                        rr.log(f"Traj{file_idx}:{data_key}/{name}", rr.Scalar(newdata[data_key][i]))
+                    elif len(newdata[data_key][i]) == 3:
+                        for _id, name in enumerate(["x", "y", "z"]):
+                            rr.log(f"Traj{file_idx}:{data_key}/{name}", rr.Scalar(newdata[data_key][i][_id]))
+                    elif len(newdata[data_key][i]) == 7 and "joint" not in name:
+                        for _id, name in enumerate(["x", "y", "z", "qx", "qy", "qz", "qw"]):
+                            rr.log(f"Traj{file_idx}:{data_key}/{name}", rr.Scalar(newdata[data_key][i][_id]))
+                            #rr.log("scene/points", rr.Points3D(positions=points, colors=colors))
+                    elif len(newdata[data_key][i]) == 6:
+                        for _id, name in enumerate(["x", "y", "z", "qx", "qy", "qz"]):
+                            rr.log(f"Traj{file_idx}:{data_key}/{name}", rr.Scalar(newdata[data_key][i][_id]))
+                    elif len(newdata[data_key][i]) == 7 and "joint" in name:
+                        for _id in range(7):
+                            rr.log(f"Traj{file_idx}:{data_key}/joint{_id}", rr.Scalar(newdata[data_key][i][_id]))
+            display_trajectory(newdata["pose"],file["file"])
             #newdata_num.append(newdata)
             #time_num.append(time)
-            i = i + 1
+            file_idx = file_idx + 1
         except Exception as e:
             print(f"Error reading file: {e}")
              # Consider logging the error
