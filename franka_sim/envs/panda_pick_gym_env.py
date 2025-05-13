@@ -6,6 +6,8 @@ import gymnasium as gym
 import mujoco
 import numpy as np
 from gymnasium import spaces
+import os
+os.environ["MUJOCO_GL"] = "egl"
 
 try:
     import mujoco_py  # noqa: F401
@@ -140,8 +142,8 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
             )
 
         self.action_space = gym.spaces.Box(
-            low=np.asarray([-1.0, -1.0, -1.0, -1.0]),
-            high=np.asarray([1.0, 1.0, 1.0, 1.0]),
+            low=np.asarray([-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]),
+            high=np.asarray([1.0, 1.0, 1.0, -1.0, -1.0, -1.0, 1.0]),
             dtype=np.float32,
         )
 
@@ -152,6 +154,8 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
         self._viewer = MujocoRenderer(
             self.model,
             self.data,
+            height=render_spec.height,
+            width=render_spec.width,
         )
         self._viewer.render(self.render_mode)
 
@@ -209,13 +213,19 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
             truncated: bool,
             info: dict[str, Any]
         """
-        x, y, z, grasp = action
+        x, y, z, qx, qy, qz, grasp = action
 
         # Set the mocap position.
         pos = self._data.mocap_pos[0].copy()
         dpos = np.asarray([x, y, z]) * self._action_scale[0]
         npos = np.clip(pos + dpos, *_CARTESIAN_BOUNDS)
         self._data.mocap_pos[0] = npos
+
+        # Set the mocap orientation.
+        quat = self._data.mocap_quat[0].copy()
+        dquat = np.asarray([qx, qy, qz]) * self._action_scale[0]
+        nquat = np.clip(quat + dquat, *_CARTESIAN_BOUNDS)
+        self._data.mocap_quat[0] = nquat
 
         # Set gripper grasp.
         g = self._data.ctrl[self._gripper_ctrl_id] / 255

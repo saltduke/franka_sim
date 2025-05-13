@@ -7,7 +7,7 @@ import numpy as np
 from franka_sim import envs
 import turtle
 
-env = envs.PandaPickCubeGymEnv(action_scale=(0.1, 1),render_mode="human")
+env = envs.PandaPickCubeGymEnv(action_scale=(0.1, 1), render_mode="human")
 action_spec = env.action_space
 
 
@@ -29,7 +29,7 @@ def key_callback(keycode):
         reset = True
 
 window = turtle.Screen()
-startposition = np.array([0,   0, 0, 0.01 ])
+startposition = np.array([0,   0, 0, 0, 0, 0, 0.01 ])
 global position
 position = startposition
 def go_f():
