@@ -84,6 +84,6 @@
   <sensor>
     <framepos name="pin1_pos" objtype="geom" objname="pin1"/>
     <framequat name="pin1_quat" objtype="geom" objname="pin1"/>
-   <framepos name="place_pos" objtype="site" objname="place"/>
+   <framepos name="place_pos" objtype="geom" objname="board"/>
   </sensor>
 </mujoco>

@@ -84,7 +84,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
                             -np.inf, np.inf, shape=(3,), dtype=np.float32
                         ),
                         "panda/tcp_quat": spaces.Box(
-                            -np.inf, np.inf, shape=(3,), dtype=np.float32
+                            -np.inf, np.inf, shape=(4,), dtype=np.float32
                         ),
                         "panda/tcp_vel": spaces.Box(
                             -np.inf, np.inf, shape=(3,), dtype=np.float32
@@ -297,13 +297,13 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
         # obs["panda/joint_torque"] = symlog(joint_torque.astype(np.float32))
 
         wrist_force = self._data.sensor("panda/wrist_force").data.astype(np.float32)
-        obs["panda/wrist_force"] = wrist_force
+        obs["state"]["panda/wrist_force"] = wrist_force
 
         if self.image_obs:
             obs["images"] = {}
             obs["images"]["front"], obs["images"]["wrist"] = self.render(cameras=2)
         pin1_pos = self._data.sensor("pin1_pos").data.astype(np.float32)
-        obs["state"]["pin1_pos"] = pin1_pos
+        #obs["state"]["pin1_pos"] = pin1_pos
         place_pos = self._data.sensor("place_pos").data.astype(np.float32)
         obs["state"]["place_pos"] = place_pos
 
@@ -314,7 +314,7 @@ class PandaPickCubeGymEnv(MujocoGymEnv):
 
     def _compute_reward(self) -> float:
         pin1_pos = self._data.sensor("pin1_pos").data
-        tcp_pos = self._data.sensor("2f85/pinch_pos").data
+        tcp_pos = self._data.sensor("place_pos").data
         dist = np.linalg.norm(pin1_pos - tcp_pos)
         r_close = np.exp(-20 * dist)
         r_lift = (pin1_pos[2] - self._z_init) / (self._z_success - self._z_init)

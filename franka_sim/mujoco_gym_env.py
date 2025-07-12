@@ -11,7 +11,7 @@ import numpy as np
 class GymRenderingSpec:
     height: int = 128
     width: int = 128
-    camera_id: str | int = -1
+    camera_id: int = -1
     mode: Literal["rgb_array", "human"] = "rgb_array"
 
 
